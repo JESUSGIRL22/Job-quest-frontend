@@ -1,19 +1,16 @@
 // src/components/JobList.js
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function JobList() {
   const [jobListings, setJobListings] = useState([]);
 
   useEffect(() => {
     // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your Rails API
-    fetch('YOUR_API_ENDPOINT')
+    axios.get('YOUR_API_ENDPOINT')
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+        setJobListings(response.data);
       })
-      .then((data) => setJobListings(data))
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
