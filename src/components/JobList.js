@@ -4,10 +4,15 @@ import React, { useState, useEffect } from 'react';
 function JobList() {
   const [jobListings, setJobListings] = useState([]);
 
-  // Fetch job listings from your API or a mock API
   useEffect(() => {
-    fetch('https://your-api-url.com/job-listings') // Replace with your API endpoint
-      .then((response) => response.json())
+    // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your Rails API
+    fetch('YOUR_API_ENDPOINT')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => setJobListings(data))
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
